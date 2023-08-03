@@ -1,0 +1,660 @@
+// SPRING BOOT BASIC
+
+Below code is within SpringBootProject
+
+pom.xml
+
+<dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-data-mongodb</artifactId>
+</dependency>
+
+/************************************************************************************************/
+Below is a utility class
+
+package com.demo.boot.SpringBootProject.util;
+
+import org.springframework.stereotype.Service;
+
+@Service
+public class PrintInfo {
+
+    public static void display(String message, String classname){
+        System.out.println("********************************************************************");
+        System.out.println(classname+" => "+message);
+        System.out.println();
+    }
+}
+
+// Add code as seen below in main method
+
+package com.demo.boot.SpringBootProject;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
+
+@SpringBootApplication
+public class SpringBootProjectApplication {
+
+    public static void main(String[] args) {
+        ConfigurableApplicationContext context =
+        SpringApplication.run(SpringBootProjectApplication.class, args);
+        System.out.println("loaded");
+    }
+
+}
+
+/************************************************************************************************/
+
+
+/************************************************ START 1 ************************************************/
+package com.demo.boot.SpringBootProject.basic01;
+
+import com.demo.boot.SpringBootProject.util.PrintInfo;
+import org.springframework.stereotype.Component;
+
+import java.util.logging.Logger;
+/**
+ * Since this class follows the package convention it will  be called
+ * automatically by Spring boot.
+ */
+@Component
+public class InsideService {
+
+    public InsideService(){
+
+        PrintInfo.display("constructor", InsideService.class.getSimpleName());
+
+    }
+}
+/************************************************ END 1 ************************************************/
+
+
+/************************************************ START 2 ************************************************/
+package basic01;
+
+import com.demo.boot.SpringBootProject.util.PrintInfo;
+import org.springframework.stereotype.Component;
+/**
+ * Since this class does not follow the package convention it will not be called
+ * automatically by Spring boot. To call it explicitly, you will have to configure
+ * using @ComponentScan
+ */
+@Component
+public class OutsideService {
+    public OutsideService() {
+        PrintInfo.display("Outside package service class constructor", OutsideService.class.getSimpleName());
+    }
+}
+/************************************************ END 2 ************************************************/
+
+
+/************************************************ START 3 ************************************************/
+package com.demo.boot.SpringBootProject.basic02.providers;
+
+public interface IMessageProvider {
+    public String getMessage();
+}
+
+package com.demo.boot.SpringBootProject.basic02.output;
+
+import com.demo.boot.SpringBootProject.basic02.providers.IMessageProvider;
+
+public interface IMessageOutput {
+    public void render();
+    public IMessageProvider getiMessageProvider();
+    public void setiMessageProvider(IMessageProvider iMessageProvider) ;
+}
+
+
+package com.demo.boot.SpringBootProject.basic02.providers;
+
+import org.springframework.stereotype.Component;
+
+import java.util.Scanner;
+@Component
+public class ScannerMessageProvider implements IMessageProvider {
+
+    @Override
+    public String getMessage() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter a message");
+        String message = sc.nextLine();
+        return message +" from Scanner as a source";
+    }
+}
+
+package com.demo.boot.SpringBootProject.basic02.output;
+
+import com.demo.boot.SpringBootProject.basic01.InsideService;
+import com.demo.boot.SpringBootProject.basic02.providers.IMessageProvider;
+import com.demo.boot.SpringBootProject.util.PrintInfo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
+
+/**
+ * Field Injection uses reflection to set the values of private variables
+ * Constructor Injection happens at the time of creating the object itself
+ * Setter Injection uses setters to set the value
+ * https://www.appsdeveloperblog.com/constructor-vs-field-dependency-injection-in-spring/
+ */
+@Component
+public class ConsoleMessageOutput implements IMessageOutput {
+    /**
+     * we have added the @Autowired annotation to both the setter and the field.
+     * In this case, Spring injects dependency using the setter injection method.
+     *
+     * If added both on constructor and field then field takes the priority
+     * here file referes to the bean name as given
+     */
+    @Autowired
+    @Qualifier("file")
+    private IMessageProvider iMessageProvider;
+    /**
+     * If a class has a single constructor, the @Autowired annotation can be ignored and
+     * Spring framework will supply that for you behind the scenes.
+     * However, if the class has more than one constructor, any one of them must be annotated with the @Autowired annotation
+     * for the parameters you want to injected
+     */
+//    public ConsoleMessageOutput() {
+//        PrintInfo.display("default constructor", ConsoleMessageOutput.class.getSimpleName());
+//    }
+    //@Autowired
+
+    public ConsoleMessageOutput(  IMessageProvider iMessageProvider) {
+        this.iMessageProvider = iMessageProvider;
+        PrintInfo.display("constructor", ConsoleMessageOutput.class.getSimpleName());
+        System.out.println(this.iMessageProvider);
+    }
+
+    @Override
+    public void render() {
+        System.out.println(iMessageProvider.getMessage());
+    }
+
+    public IMessageProvider getiMessageProvider() {
+        return iMessageProvider;
+    }
+
+    /**
+     * setter autowired overrides the constructor injection
+     * @Qualifier overrides the @Primnary annotation
+     * @param iMessageProvider
+     */
+   // @Autowired
+    //@Qualifier("scannerMessageProvider")
+    public void setiMessageProvider(IMessageProvider iMessageProvider) {
+        PrintInfo.display("setter", ConsoleMessageOutput.class.getSimpleName());
+        this.iMessageProvider = iMessageProvider;
+    }
+
+}
+############################## ADD BELOW IN MAIN ##############################
+IMessageOutput messageOutput = context.getBean(IMessageOutput.class);
+        messageOutput.render();
+##############################  ##############################
+
+
+package com.demo.boot.SpringBootProject.basic02.providers;
+
+import org.springframework.stereotype.Component;
+
+import java.util.Scanner;
+// give name to your bean
+@Component("file")
+public class FileMessageProvider implements IMessageProvider {
+
+    @Override
+    public String getMessage() {
+        return "Read message from FILE!!!";
+    }
+}
+
+
+application.properties =>
+message=Data from properties file as string
+
+package com.demo.boot.SpringBootProject.basic02.providers;
+
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Primary;
+import org.springframework.stereotype.Component;
+
+@Component
+@Primary
+public class StringMessageProvider implements IMessageProvider {
+
+   // @Value("Some string message")
+    @Value("${message}")
+    String message;
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    @Override
+    public String getMessage() {
+        return message;
+    }
+}
+
+
+/************************************************ END 3 ************************************************/
+
+
+/************************************************ START 4 ************************************************/
+
+CREAT ANOTHER Maven java prject as follows:
+
+Below code is within PaymentProject which is a Java Maven Project. [ PLEASE NOTE : IT IS NOT SPRING BOOT PROJECT]
+It has only one class as follows 
+
+package com.payment;
+
+public class PaymentService {
+
+    public double makePayment(double amount, double discount){
+        amount = amount - amount * discount/100;
+        double total = amount + 0.18;
+        return  total;
+    }
+}
+
+VVIMP:
+Run maven install to create a jar file of PaymentProject and install within local repository.
+/************************************************ END 4 ************************************************/
+
+
+GO BACK TO SpringBootProject :
+
+/************************************************ START 5 ************************************************/
+
+ Add PaymentProject as maven dependency in pom.xml
+
+<dependency>
+            <groupId>com.payment</groupId>
+            <artifactId>PaymentProject</artifactId>
+            <version>1.0-SNAPSHOT</version>
+</dependency>
+
+
+package com.demo.boot.SpringBootProject.basic03.service;
+
+import org.springframework.stereotype.Service;
+
+@Service
+public class ValidationService {
+    public boolean validatePhone(String phone)
+    {
+        if(phone.length() <10)
+            return false;
+        return true;
+    }
+}
+
+package com.demo.boot.SpringBootProject.basic03.controller;
+
+import com.demo.boot.SpringBootProject.basic03.service.ValidationService;
+import com.demo.boot.SpringBootProject.util.PrintInfo;
+import com.payment.PaymentService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Controller;
+
+/**
+ * When added @Lazy it will be called only when requested for
+ */
+@Controller("main")
+@Lazy
+public class MainController {
+
+    @Autowired
+    private ValidationService validationService;
+    /**
+     * payment service is not a part of this project and has been added as a dependency.
+     * IN this case we cannot add @Component on the PaymentService class.
+     * Hence use @Bean in the configuration class
+     */
+    @Autowired
+    private PaymentService paymentService;
+
+    public MainController() {
+        PrintInfo.display("constructor", MainController.class.getSimpleName());
+    }
+
+    public void callService()
+    {
+        System.out.println(validationService.validatePhone("1234567891"));
+        System.out.println(paymentService.makePayment(12000,10));
+    }
+}
+
+
+
+
+package com.demo.boot.SpringBootProject;
+
+import com.payment.PaymentService;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class AppConfig {
+    /**
+     * PaymentService is 3rd party class. To inject as a dependency use @Bean
+     */
+    @Bean
+    public PaymentService paymentService()
+    {
+        return new PaymentService();
+    }
+
+}
+
+############################## ADD BELOW IN MAIN ##############################
+
+MainController controller = (MainController) context.getBean("main");
+        controller.callService();
+##############################  ##############################
+
+/************************************************ END 5 ************************************************/
+
+/************************************************ START 6 ************************************************/
+
+package com.demo.boot.SpringBootProject.basic04;
+
+public class Author {
+    private String aid;
+    private String name;
+    // getter/ setter/ constructor / tostring
+    }
+
+
+package com.demo.boot.SpringBootProject.basic04;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+@Component
+public class CollectionDemo {
+    @Autowired
+    private List<String> fruits;
+    @Autowired
+    private List<Author> authors;
+    @Autowired
+    private Set<Integer> ids;
+    @Autowired
+    private Map<String, Integer> map;
+    public List<String> getFruits() {
+        return fruits;
+    }
+    public void setFruits(List<String> fruits) {
+        this.fruits = fruits;
+    }
+    public List<Author> getAuthors() {
+        return authors;
+    }
+    public void setAuthors(List<Author> authors) {
+        this.authors = authors;
+    }
+    public Set<Integer> getIds() {
+        return ids;
+    }
+    public void setIds(Set<Integer> ids) {
+        this.ids = ids;
+    }
+    public Map<String, Integer> getMap() {
+        return map;
+    }
+    public void setMap(Map<String, Integer> map) {
+        this.map = map;
+    }
+
+}
+
+Add below code in AppConfig
+
+ @Bean
+    public List<String> getFruits()
+    {
+        System.out.println("fruits created");
+        return Arrays.asList("Apples","Oranges","Grapes");
+    }
+    @Bean
+    public Set<Integer> getIds()
+    {
+        System.out.println("ids created");
+        Set<Integer> ids = new HashSet<Integer>();
+        ids.add(1);
+        ids.add(2);
+        ids.add(3);
+        return ids;
+    }
+    @Bean
+    public List<Author> initializeData()
+    {
+        System.out.println("authors created");
+        return Arrays.asList(new Author("A101", "AA"),new Author("A102", "BB"));
+    }
+    @Bean
+    public Map<String, Integer> getMap()
+    {
+        System.out.println("map created");
+        Map<String, Integer> map = new HashMap<String, Integer>();
+        map.put("S1", 1);
+        map.put("S2", 2);
+        return map;
+    }
+
+############################## ADD BELOW IN MAIN ##############################
+        CollectionDemo demo = context.getBean(CollectionDemo.class);
+        System.out.println(demo.getFruits());
+        System.out.println(demo.getAuthors());
+        System.out.println(demo.getIds());
+        System.out.println(demo.getMap());
+############################## ##############################
+
+/************************************************ END 6 ************************************************/
+
+-------------------------------
+SPRING BOOT MONGODB
+-------------------------------
+
+/************************************************ START 7 ************************************************/
+
+Add below in pom.xml
+
+<dependency>
+            <groupId>javax.annotation</groupId>
+            <artifactId>javax.annotation-api</artifactId>
+            <version>1.3.2</version>
+</dependency>
+
+package com.demo.boot.SpringBootProject.basic05.entity;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Field;
+
+public class Employee {
+
+    @Id
+    private long employeeId = -1;
+
+    private String name;
+    private String region;
+
+    @Field("salary")
+    private double dosh;
+    // getter/ setter/ constructor / tostring
+    }
+
+
+package com.demo.boot.SpringBootProject.basic05.dao;
+
+import java.util.List;
+
+import com.demo.boot.SpringBootProject.basic05.entity.Employee;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.mongodb.repository.Query;
+
+
+public interface EmployeeRepository extends MongoRepository<Employee,Long> {
+
+//    @Query("{region:'?0'}")
+//    List<Employee> seekByRegion(String region);
+
+    List<Employee> findEmployeesByRegion(String region);
+    @Query("{'dosh' : {$gte : ?0, $lte : ?1}}")
+    List<Employee> findEmployeesInSalaryRange(double from, double to);
+
+    Page<Employee> findEmployeesByDoshGreaterThan(double salary, Pageable pageable);
+    Page<Employee> findAll(Pageable pageable);
+}
+
+package com.demo.boot.SpringBootProject.basic05.service;
+
+import java.util.List;
+
+import com.demo.boot.SpringBootProject.basic05.dao.EmployeeRepository;
+import com.demo.boot.SpringBootProject.basic05.entity.Employee;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+
+
+@Service
+public class EmployeeService {
+
+    @Autowired
+    private EmployeeRepository repository;
+
+    // Insert an employee.
+    public void addEmployee()
+    {
+        Employee newEmp = new Employee(-1, "Simon Peter", 10000, "Israel");
+        Employee employee = repository.save(newEmp);
+        System.out.printf("There are now %d employees\n", repository.count());
+    }
+    // Get all employees.
+    public void getAllEmployees()
+    {
+        displayEmployees("All employees list ", repository.findAll());
+    }
+
+    // Get all employees by region.
+    public void getAllEmployeesByRegion(String region) {
+        displayEmployees("All employees By Region: ", repository.findEmployeesByRegion(region));
+    }
+    // Get all employees by salary range.
+    public void getAllEmployeesByRange(double from, double to) {
+        List<Employee> emps = repository.findEmployeesInSalaryRange(from,  to);
+        displayEmployees("Employees earning 20k to 50k: ", emps);
+    }
+    // Get a page of employees.
+    public void getEmployeesByPagination(double from, double to) {
+        Pageable pageable = PageRequest.of(1, 3, Direction.DESC, "dosh");
+        Page<Employee> page = repository.findEmployeesByDoshGreaterThan(50000, pageable);
+        displayEmployees("Page 1 of employees more than 50k: ", page.getContent());
+
+        pageable = PageRequest.of(1, 3);
+        page = repository.findAll( pageable);
+        System.out.println(page.getTotalPages());
+        displayEmployees("Page 1 of all employees ", page.getContent());
+    }
+
+    public void updateEmployee( Employee empToUpdate)
+    {
+       if(repository.existsById(empToUpdate.getEmployeeId())){
+           repository.save(empToUpdate);
+       }
+       else
+           System.out.println("Employee not found");
+    }
+    public void deleteEmployee(long employeeId)
+    {
+        Employee employee = repository.findById(employeeId).orElse(null);
+        if(employee != null){
+            repository.save(employee);
+        }
+        else
+            System.out.println("Employee not found");
+    }
+    private void displayEmployees(String message, Iterable<Employee> employees) {
+        System.out.printf("\n%s\n", message);
+        for (Employee emp: employees) {
+            System.out.println(emp);
+        }
+    }
+
+}
+
+######################
+USING MongoTemplate
+######################
+
+package com.demo.boot.SpringBootProject.basic05.dao;
+
+import com.demo.boot.SpringBootProject.basic05.entity.Employee;
+
+import java.util.List;
+
+public interface IEmployeeDAO {
+    List<Employee> getAllEmployees();
+    Employee getEmployeeById(long employeeId);
+    Employee addNewEmployee(Employee employee);
+}
+
+
+package com.demo.boot.SpringBootProject.basic05.dao;
+
+
+import com.demo.boot.SpringBootProject.basic05.entity.Employee;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
+@Repository
+public class EmployeeDALImpl implements  IEmployeeDAO{
+    @Autowired
+    private MongoTemplate mongoTemplate;
+
+    @Override
+    public List<Employee> getAllEmployees() {
+        return  mongoTemplate.findAll(Employee.class);
+    }
+
+    @Override
+    public Employee getEmployeeById(long employeeId) {
+        Query query = new Query();
+        query.addCriteria(Criteria.where("employeeId").is(employeeId));
+        return mongoTemplate.findOne(query, Employee.class);
+    }
+
+    @Override
+    public Employee addNewEmployee(Employee employee) {
+        mongoTemplate.save(employee);
+        // Now, user object will contain the ID as well
+        return employee;
+    }
+}
+
+
+/************************************************ END 7 ************************************************/
+
