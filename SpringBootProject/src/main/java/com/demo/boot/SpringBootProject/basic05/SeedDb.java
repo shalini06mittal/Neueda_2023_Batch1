@@ -8,8 +8,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
 
 @Configuration
 public class SeedDb {
@@ -17,7 +15,7 @@ public class SeedDb {
     @Autowired
     private EmployeeRepository repository;
 
-    @PostConstruct
+    @Bean
     public void init() {
         repository.save(new Employee(1, "James", 21000, "London"));
         repository.save(new Employee(2, "Marie", 22000, "Edinburgh"));
@@ -37,8 +35,5 @@ public class SeedDb {
         repository.save(new Employee(16, "Carys", 124000, "Cardiff"));
     }
 
-    @PreDestroy
-    public void cleanup() {
-        repository.deleteAll();
-    }
+
 }

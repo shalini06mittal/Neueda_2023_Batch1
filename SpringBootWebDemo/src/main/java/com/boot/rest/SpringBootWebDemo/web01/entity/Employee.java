@@ -1,4 +1,4 @@
-package com.boot.rest.SpringBootWebDemo.web02.entity;
+package com.boot.rest.SpringBootWebDemo.web01.entity;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -8,10 +8,8 @@ public class Employee {
 
     @Id
     private long employeeId = -1;
-
     private String name;
     private String region;
-
     @Field("salary")
     private double dosh;
 

@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.demo.boot.SpringBootProject.basic05.dao.EmployeeRepository;
 import com.demo.boot.SpringBootProject.basic05.entity.Employee;
+import com.demo.boot.SpringBootProject.basic05.exception.RecordExistsException;
+import com.demo.boot.SpringBootProject.basic05.exception.RecordNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -15,66 +17,57 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class EmployeeService {
-
     @Autowired
     private EmployeeRepository repository;
-
-    // Insert an employee.
-    public void addEmployee()
-    {
-        Employee newEmp = new Employee(-1, "Simon Peter", 10000, "Israel");
-        Employee employee = repository.save(newEmp);
+    public Employee insertEmployee(Employee employee) throws RecordExistsException {
+        if(repository.existsById(employee.getEmployeeId()))
+            throw new RecordExistsException("Employee with "+employee.getEmployeeId()+"already exists");
+        long count = this.repository.count();
+        employee.setEmployeeId(count+1);
+        Employee savedEmployee = repository.save(employee);
         System.out.printf("There are now %d employees\n", repository.count());
+        return  savedEmployee;
     }
     // Get all employees.
-    public void getAllEmployees()
+    public List<Employee> getAllEmployees()
     {
-        displayEmployees("All employees list ", repository.findAll());
+        return this.repository.findAll();
     }
-
+    public Employee getEmployeeById(long empid) throws RecordNotFoundException {
+        return repository.findById(empid)
+                .orElseThrow(()->new RecordNotFoundException("employee with "+empid+" does not exist"));
+    }
     // Get all employees by region.
-    public void getAllEmployeesByRegion(String region) {
-        displayEmployees("All employees By Region: ", repository.findEmployeesByRegion(region));
+    public List<Employee> getAllEmployeesByRegion(String region) {
+        return this.repository.findEmployeesByRegion(region);
     }
     // Get all employees by salary range.
-    public void getAllEmployeesByRange(double from, double to) {
-        List<Employee> emps = repository.findEmployeesInSalaryRange(from,  to);
-        displayEmployees("Employees earning 20k to 50k: ", emps);
+    public List<Employee> getAllEmployeesBySalaryRange(double from, double to) {
+        return this.repository.findEmployeesInSalaryRange(from,  to);
     }
     // Get a page of employees.
-    public void getEmployeesByPagination(double from, double to) {
-        Pageable pageable = PageRequest.of(1, 3, Direction.DESC, "dosh");
-        Page<Employee> page = repository.findEmployeesByDoshGreaterThan(50000, pageable);
-        displayEmployees("Page 1 of employees more than 50k: ", page.getContent());
+    public List<Employee> getEmployeesByPagination(int pageno, int size) {
+        Pageable pageable = PageRequest.of(pageno, size);
+        Page<Employee> page = repository.findAll( pageable);
+        int totalPages = page.getTotalPages();
+        long totalElements = page.getTotalElements();
+        int noofelements = page.getNumberOfElements();
+        int pagesize = page.getSize();
 
-        pageable = PageRequest.of(1, 3);
-        page = repository.findAll( pageable);
-        System.out.println(page.getTotalPages());
-        displayEmployees("Page 1 of all employees ", page.getContent());
+        return page.getContent();
     }
 
-    public void updateEmployee( Employee empToUpdate)
-    {
-       if(repository.existsById(empToUpdate.getEmployeeId())){
-           repository.save(empToUpdate);
-       }
-       else
-           System.out.println("Employee not found");
+    public void updateEmployee( Employee empToUpdate) throws RecordNotFoundException {
+        System.out.println("UPDATE "+empToUpdate.getEmployeeId());
+        if(! repository.existsById(empToUpdate.getEmployeeId()))
+            throw new RecordNotFoundException("employee with "+empToUpdate.getEmployeeId()+" does not exist");
+        repository.save(empToUpdate);
     }
-    public void deleteEmployee(long employeeId)
-    {
-        Employee employee = repository.findById(employeeId).orElse(null);
-        if(employee != null){
-            repository.save(employee);
-        }
-        else
-            System.out.println("Employee not found");
-    }
-    private void displayEmployees(String message, Iterable<Employee> employees) {
-        System.out.printf("\n%s\n", message);
-        for (Employee emp: employees) {
-            System.out.println(emp);
-        }
+    public void deleteEmployee(long employeeId) throws RecordNotFoundException {
+
+        if(repository.existsById(employeeId))
+            throw new RecordNotFoundException("employee with "+employeeId+" does not exist");
+        repository.deleteById(employeeId);
     }
 
 }

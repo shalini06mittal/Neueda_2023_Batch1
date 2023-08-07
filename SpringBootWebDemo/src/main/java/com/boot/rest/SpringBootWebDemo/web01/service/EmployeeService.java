@@ -1,18 +1,16 @@
-package com.boot.rest.SpringBootWebDemo.web02.service;
+package com.boot.rest.SpringBootWebDemo.web01.service;
 
 import java.util.List;
 
-import com.boot.rest.SpringBootWebDemo.web02.dao.EmployeeRepository;
-import com.boot.rest.SpringBootWebDemo.web02.dto.EmployeePerPageResponse;
-import com.boot.rest.SpringBootWebDemo.web02.entity.Employee;
-import com.boot.rest.SpringBootWebDemo.web02.exception.RecordExistsException;
-import com.boot.rest.SpringBootWebDemo.web02.exception.RecordNotFoundException;
+import com.boot.rest.SpringBootWebDemo.web01.dao.EmployeeRepository;
+import com.boot.rest.SpringBootWebDemo.web01.dto.EmployeePerPageResponse;
+import com.boot.rest.SpringBootWebDemo.web01.entity.Employee;
+import com.boot.rest.SpringBootWebDemo.web01.exception.RecordExistsException;
+import com.boot.rest.SpringBootWebDemo.web01.exception.RecordNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort.Direction;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 @Service
 public class EmployeeService {
@@ -47,7 +45,6 @@ public class EmployeeService {
     }
     // Get a page of employees.
     public EmployeePerPageResponse getEmployeesByPagination(int pageno, int size) {
-       // Pageable pageable = PageRequest.of(pageno, size, Direction.DESC, "dosh");
         Pageable pageable = PageRequest.of(pageno, size);
         Page<Employee> page = repository.findAll( pageable);
         int totalPages = page.getTotalPages();
@@ -73,8 +70,6 @@ public class EmployeeService {
 
         if(repository.existsById(employeeId))
             throw new RecordNotFoundException("employee with "+employeeId+" does not exist");
-
         repository.deleteById(employeeId);
-
     }
 }

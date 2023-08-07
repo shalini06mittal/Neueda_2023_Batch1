@@ -1,6 +1,6 @@
-package com.boot.rest.SpringBootWebDemo.web02.dto;
+package com.boot.rest.SpringBootWebDemo.web01.dto;
 
-import com.boot.rest.SpringBootWebDemo.web02.entity.Employee;
+import com.boot.rest.SpringBootWebDemo.web01.entity.Employee;
 
 import java.util.List;
 

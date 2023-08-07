@@ -1,4 +1,4 @@
-package com.boot.rest.SpringBootWebDemo.web02.exception;
+package com.boot.rest.SpringBootWebDemo.web01.exception;
 
 public class RecordNotFoundException extends  Exception{
 

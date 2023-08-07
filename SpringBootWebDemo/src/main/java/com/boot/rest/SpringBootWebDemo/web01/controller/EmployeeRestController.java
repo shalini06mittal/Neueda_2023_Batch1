@@ -1,11 +1,11 @@
-package com.boot.rest.SpringBootWebDemo.web02.controller;
+package com.boot.rest.SpringBootWebDemo.web01.controller;
 
-import com.boot.rest.SpringBootWebDemo.web02.dto.EmployeePerPageResponse;
-import com.boot.rest.SpringBootWebDemo.web02.entity.Employee;
-import com.boot.rest.SpringBootWebDemo.web02.exception.RecordExistsException;
-import com.boot.rest.SpringBootWebDemo.web02.exception.RecordNotFoundException;
-import com.boot.rest.SpringBootWebDemo.web02.service.EmployeeService;
-import com.boot.rest.SpringBootWebDemo.web02.utility.StatusMessages;
+import com.boot.rest.SpringBootWebDemo.web01.dto.EmployeePerPageResponse;
+import com.boot.rest.SpringBootWebDemo.web01.entity.Employee;
+import com.boot.rest.SpringBootWebDemo.web01.exception.RecordExistsException;
+import com.boot.rest.SpringBootWebDemo.web01.exception.RecordNotFoundException;
+import com.boot.rest.SpringBootWebDemo.web01.service.EmployeeService;
+import com.boot.rest.SpringBootWebDemo.web01.utility.StatusMessages;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,13 +16,42 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * If using @Controller then to create REST API's you need to add @ResponseBody on the methods
+ * to return data as a response
+ */
+
+/**
+ * Ideally there should not be separate paths for respective HTTP methods. The REST URI should not contain verbs in them.
+ * Hence if path is http://localhhost:8080/employees,
+ * then for the verbs/HTTP methods use respective GET/POST/PUT/DELETE annotations
+ */
+//@Controller // If using @Controller then @ResponseBody is used to create REST API
 @RestController
+/**
+ * If the /employees is common across the mappings then there can be 1 root mapping as follows:
+ * Remove the /employees mappings from other annotations
+ */
 @RequestMapping("/employees")
+// @Tag is used to display name on swagger UI, ONLY IF SWAGGER ADDED AS DEPENDENCY
 @Tag(name="EMPLOYEE-CONTROLLER")
 public class EmployeeRestController {
 
     @Autowired
     private EmployeeService employeeService;
+    /**
+     * @RequestMapping is a general annotation. To restrict access for different HTTP methods,
+     * need to add method attribute separately
+     * Instead use more composed annotations [@GetMapping, @PostMapping, @PutMapping, @DeleteMapping]
+     * for all HTTP methods
+     */
+    //@RequestMapping("/employees/get")
+    //@RequestMapping(path = "/employees/get",, method = RequestMethod.GET)
+    //@GetMapping("/employees/get")
+    /**
+     * Just use annotations for respective HTTP methods and no need to put verbs within them
+     * @return
+     */
     @GetMapping
     public List<Employee> getAllEmployees(@RequestParam(required = false) String region)
     {
@@ -57,6 +86,9 @@ public class EmployeeRestController {
             return ResponseEntity.noContent().build();
         }
     }
+    //@RequestMapping("/employees/post")
+   // @RequestMapping(path = "/employees/post", method = RequestMethod.POST)
+    //@PostMapping("/employees/post")
     @PostMapping
     public ResponseEntity<Object> addEmployee(@RequestBody Employee employee)
     {

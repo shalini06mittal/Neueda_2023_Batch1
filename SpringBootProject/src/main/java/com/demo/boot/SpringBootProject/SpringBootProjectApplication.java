@@ -4,6 +4,7 @@ import com.demo.boot.SpringBootProject.basic02.output.IMessageOutput;
 import com.demo.boot.SpringBootProject.basic03.controller.MainController;
 import com.demo.boot.SpringBootProject.basic04.CollectionDemo;
 import com.demo.boot.SpringBootProject.basic05.entity.Employee;
+import com.demo.boot.SpringBootProject.basic05.exception.RecordNotFoundException;
 import com.demo.boot.SpringBootProject.basic05.service.EmployeeService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -36,7 +37,11 @@ public class SpringBootProjectApplication {
 
 		EmployeeService employeeService = context.getBean(EmployeeService.class);
 		employeeService.getAllEmployees();
-		employeeService.updateEmployee(new Employee(16, "Shalini", 124000, "Cardiff"));
+		try {
+			employeeService.updateEmployee(new Employee(16, "Shalini", 124000, "Cardiff"));
+		} catch (RecordNotFoundException e) {
+			throw new RuntimeException(e);
+		}
 		employeeService.getAllEmployees();
 	}
 

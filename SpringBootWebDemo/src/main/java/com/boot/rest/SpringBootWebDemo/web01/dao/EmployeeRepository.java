@@ -1,9 +1,9 @@
-package com.boot.rest.SpringBootWebDemo.web02.dao;
+package com.boot.rest.SpringBootWebDemo.web01.dao;
 
 import java.util.List;
 
 
-import com.boot.rest.SpringBootWebDemo.web02.entity.Employee;
+import com.boot.rest.SpringBootWebDemo.web01.entity.Employee;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.repository.MongoRepository;

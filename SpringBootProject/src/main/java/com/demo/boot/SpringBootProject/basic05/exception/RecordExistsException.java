@@ -1,4 +1,4 @@
-package com.boot.rest.SpringBootWebDemo.web02.exception;
+package com.demo.boot.SpringBootProject.basic05.exception;
 
 public class RecordExistsException  extends  Exception{
 

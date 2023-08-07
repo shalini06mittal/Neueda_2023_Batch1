@@ -19,5 +19,4 @@ public interface EmployeeRepository extends MongoRepository<Employee,Long> {
     List<Employee> findEmployeesInSalaryRange(double from, double to);
 
     Page<Employee> findEmployeesByDoshGreaterThan(double salary, Pageable pageable);
-    Page<Employee> findAll(Pageable pageable);
 }

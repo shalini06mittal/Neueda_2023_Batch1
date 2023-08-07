@@ -1,13 +1,12 @@
 package com.boot.rest.SpringBootWebDemo;
 
-import com.boot.rest.SpringBootWebDemo.web02.dao.EmployeeRepository;
-import com.boot.rest.SpringBootWebDemo.web02.entity.Employee;
+import com.boot.rest.SpringBootWebDemo.web01.dao.EmployeeRepository;
+import com.boot.rest.SpringBootWebDemo.web01.entity.Employee;
 
-import jakarta.annotation.PostConstruct;
-import jakarta.annotation.PreDestroy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 
 import java.util.logging.Logger;
 
@@ -25,7 +24,7 @@ public class SpringBootWebDemoApplication {
 	}
 	@Autowired
 	private EmployeeRepository repository;
-	@PostConstruct
+	@Bean
 	public void init() {
 		logger.info("EMPLOYEES DATA ADDED");
 		repository.save(new Employee(1, "James", 21000, "London"));
@@ -47,9 +46,4 @@ public class SpringBootWebDemoApplication {
 		repository.save(new Employee(17, "Shalini", 224000, "Mumbai"));
 	}
 
-	//@PreDestroy
-	public void cleanup() {
-		logger.info("EMPLOYEES DELETED");
-		repository.deleteAll();
-	}
 }
