@@ -1,23 +1,20 @@
 package com.neueda.boot.SpringBootDemo.exercise3.services;
 
-
-import com.neueda.boot.SpringBootDemo.exercise3.entities.MusicData;
+import com.neueda.boot.SpringBootDemo.exercise3.entities.MyMusic;
 import com.neueda.boot.SpringBootDemo.exercise3.exceptions.MusicNotFoundException;
+import org.bson.types.ObjectId;
 
 import java.util.List;
 
 public interface IMusicService {
 
-    public MusicData addMusicData(MusicData data);
+    public MyMusic addMusicData(MyMusic data);
 
-    public MusicData deleteMusicData(String name);
+    public MyMusic deleteMusicData(String name);
 
-    public List<MusicData> getAllMusicData();
+    public List<MyMusic> getAllMusicData();
 
-    public MusicData getMusicByName(String name) throws MusicNotFoundException;
+    public MyMusic getMusicByName(String name) throws MusicNotFoundException;
 
-    public MusicData updateMusicData(String name , MusicData movieData) throws MusicNotFoundException;
-
-
-
+    public MyMusic updateMusicData(String name , MyMusic movieData) throws MusicNotFoundException;
 }

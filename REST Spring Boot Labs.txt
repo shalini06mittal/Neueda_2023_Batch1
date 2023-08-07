@@ -147,5 +147,317 @@ public class FirstController {
 
 /************************************************ START 2 ************************************************/
 
+package com.boot.rest.SpringBootWebDemo.web02.entity;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+@Document
+public class Employee {
+
+    @Id
+    private long employeeId = -1;
+
+    private String name;
+    private String region;
+
+    @Field("salary")
+    private double dosh;
+    }
+
+
+
+package com.boot.rest.SpringBootWebDemo.web02.dao;
+
+import java.util.List;
+
+
+import com.boot.rest.SpringBootWebDemo.web02.entity.Employee;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.mongodb.repository.Query;
+
+
+public interface EmployeeRepository extends MongoRepository<Employee,Long> {
+
+//    @Query("{region:'?0'}")
+//    List<Employee> seekByRegion(String region);
+
+    List<Employee> findEmployeesByRegion(String region);
+    @Query("{'dosh' : {$gte : ?0, $lte : ?1}}")
+    List<Employee> findEmployeesInSalaryRange(double from, double to);
+
+    Page<Employee> findEmployeesByDoshGreaterThan(double salary, Pageable pageable);
+    Page<Employee> findAll(Pageable pageable);
+}
+
+package com.boot.rest.SpringBootWebDemo.web02.exception;
+
+public class RecordExistsException  extends  Exception{
+
+    public RecordExistsException(String message) {
+        super(message);
+    }
+}
+
+package com.boot.rest.SpringBootWebDemo.web02.exception;
+
+public class RecordNotFoundException extends  Exception{
+
+    public RecordNotFoundException(String message) {
+        super(message);
+    }
+}
+
+
+package com.boot.rest.SpringBootWebDemo.web02.service;
+
+import java.util.List;
+
+import com.boot.rest.SpringBootWebDemo.web02.dao.EmployeeRepository;
+import com.boot.rest.SpringBootWebDemo.web02.dto.EmployeePerPageResponse;
+import com.boot.rest.SpringBootWebDemo.web02.entity.Employee;
+import com.boot.rest.SpringBootWebDemo.web02.exception.RecordExistsException;
+import com.boot.rest.SpringBootWebDemo.web02.exception.RecordNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+@Service
+public class EmployeeService {
+    @Autowired
+    private EmployeeRepository repository;
+    // Insert an employee.
+    public Employee insertEmployee(Employee employee) throws RecordExistsException {
+        if(repository.existsById(employee.getEmployeeId()))
+            throw new RecordExistsException("Employee with "+employee.getEmployeeId()+"already exists");
+        long count = this.repository.count();
+        employee.setEmployeeId(count+1);
+        Employee savedEmployee = repository.save(employee);
+        System.out.printf("There are now %d employees\n", repository.count());
+        return  savedEmployee;
+    }
+    // Get all employees.
+    public List<Employee> getAllEmployees()
+    {
+        return this.repository.findAll();
+    }
+    public Employee getEmployeeById(long empid) throws RecordNotFoundException {
+           return repository.findById(empid)
+                    .orElseThrow(()->new RecordNotFoundException("employee with "+empid+" does not exist"));
+    }
+    // Get all employees by region.
+    public List<Employee> getAllEmployeesByRegion(String region) {
+        return this.repository.findEmployeesByRegion(region);
+    }
+    // Get all employees by salary range.
+    public List<Employee> getAllEmployeesBySalaryRange(double from, double to) {
+        return this.repository.findEmployeesInSalaryRange(from,  to);
+    }
+    // Get a page of employees.
+    public EmployeePerPageResponse getEmployeesByPagination(int pageno, int size) {
+       // Pageable pageable = PageRequest.of(pageno, size, Direction.DESC, "dosh");
+        Pageable pageable = PageRequest.of(pageno, size);
+        Page<Employee> page = repository.findAll( pageable);
+        int totalPages = page.getTotalPages();
+        long totalElements = page.getTotalElements();
+        int noofelements = page.getNumberOfElements();
+        int pagesize = page.getSize();
+        EmployeePerPageResponse response = new EmployeePerPageResponse();
+        response.setEmployees(page.getContent());
+        response.setNoofelements(noofelements);
+        response.setPagesize(pagesize);
+        response.setTotalElements(totalElements);
+        response.setTotalPages(totalPages);
+        return response;
+    }
+
+    public void updateEmployee( Employee empToUpdate) throws RecordNotFoundException {
+        System.out.println("UPDATE "+empToUpdate.getEmployeeId());
+       if(! repository.existsById(empToUpdate.getEmployeeId()))
+           throw new RecordNotFoundException("employee with "+empToUpdate.getEmployeeId()+" does not exist");
+       repository.save(empToUpdate);
+    }
+    public void deleteEmployee(long employeeId) throws RecordNotFoundException {
+
+        if(repository.existsById(employeeId))
+            throw new RecordNotFoundException("employee with "+employeeId+" does not exist");
+
+        repository.deleteById(employeeId);
+
+    }
+}
+
+
+package com.boot.rest.SpringBootWebDemo.web02.utility;
+
+public enum StatusMessages {
+    SUCCESS, FAILURE
+}
+
+
+package com.boot.rest.SpringBootWebDemo.web02.controller;
+
+import com.boot.rest.SpringBootWebDemo.web02.dto.EmployeePerPageResponse;
+import com.boot.rest.SpringBootWebDemo.web02.entity.Employee;
+import com.boot.rest.SpringBootWebDemo.web02.exception.RecordExistsException;
+import com.boot.rest.SpringBootWebDemo.web02.exception.RecordNotFoundException;
+import com.boot.rest.SpringBootWebDemo.web02.service.EmployeeService;
+import com.boot.rest.SpringBootWebDemo.web02.utility.StatusMessages;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+@RestController
+@RequestMapping("/employees")
+@Tag(name="EMPLOYEE-CONTROLLER")
+public class EmployeeRestController {
+
+    @Autowired
+    private EmployeeService employeeService;
+    @GetMapping
+    public List<Employee> getAllEmployees(@RequestParam(required = false) String region)
+    {
+        if(region == null)
+        return employeeService.getAllEmployees();
+        return employeeService.getAllEmployeesByRegion(region);
+    }
+
+    /**
+     * Path variable is used to map the value passed in the path of url
+     * http://localhost:8080/employees/10 => so 10 is mapped with employeeId
+     * @param employeeId
+     * @return
+     */
+    @GetMapping("/{employeeId}")
+    public Employee getEmployeeById(@PathVariable long employeeId)
+    {
+        try {
+            return this.employeeService.getEmployeeById(employeeId);
+        } catch (RecordNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    @GetMapping("/resp/{employeeId}")
+    public ResponseEntity<Object> getEmployeeByIdResponse(@PathVariable long employeeId)
+    {
+        try {
+            Employee employee = this.employeeService.getEmployeeById(employeeId);
+            return ResponseEntity.status(HttpStatus.FOUND).body(employee);
+        } catch (RecordNotFoundException e) {
+           // throw new RuntimeException(e);
+            return ResponseEntity.noContent().build();
+        }
+    }
+    @PostMapping
+    public ResponseEntity<Object> addEmployee(@RequestBody Employee employee)
+    {
+        try {
+            Employee employee1 = this.employeeService.insertEmployee(employee);
+            return ResponseEntity.status(HttpStatus.CREATED).body(employee1);
+        } catch (RecordExistsException e) {
+            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(e.getMessage());
+        }
+    }
+    @PutMapping
+    public ResponseEntity<Object> updateEmployee(@RequestBody Employee employee)
+    {
+        Map<StatusMessages , String> map = new HashMap<>();
+        try {
+            this.employeeService.updateEmployee(employee);
+            map.put(StatusMessages.SUCCESS, "Employee updated successfully");
+            return ResponseEntity.status(HttpStatus.ACCEPTED).body(map);
+        } catch (RecordNotFoundException e) {
+            map.put(StatusMessages.FAILURE, e.getMessage());
+            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(map);
+        }
+    }
+    @DeleteMapping("/{employeeId}")
+    public ResponseEntity<Object> deleteEmployeeById(@PathVariable long employeeId)
+    {
+        Map<StatusMessages , String> map = new HashMap<>();
+        try {
+            map.put(StatusMessages.SUCCESS, "Employee deleted successfully");
+            this.employeeService.deleteEmployee(employeeId);
+            return ResponseEntity.status(HttpStatus.ACCEPTED).body(map);
+        } catch (RecordNotFoundException e) {
+            map.put(StatusMessages.FAILURE, e.getMessage());
+            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(map);
+        }
+    }
+    @GetMapping("/pages")
+    public EmployeePerPageResponse getEmployeesByPage(@RequestParam(required = false, defaultValue = "0") int pageno,
+                                                      @RequestParam(required = false, defaultValue = "5") int size)
+    {
+        return this.employeeService.getEmployeesByPagination(pageno, size);
+    }
+
+}
+
+
+package com.boot.rest.SpringBootWebDemo.web02.dto;
+
+import com.boot.rest.SpringBootWebDemo.web02.entity.Employee;
+
+import java.util.List;
+
+public class EmployeePerPageResponse {
+
+    int totalPages;
+    long totalElements;
+    int noofelements ;
+    int pagesize ;
+    List<Employee> employees;
+
+    public int getTotalPages() {
+        return totalPages;
+    }
+
+    public void setTotalPages(int totalPages) {
+        this.totalPages = totalPages;
+    }
+
+    public long getTotalElements() {
+        return totalElements;
+    }
+
+    public void setTotalElements(long totalElements) {
+        this.totalElements = totalElements;
+    }
+
+    public int getNoofelements() {
+        return noofelements;
+    }
+
+    public void setNoofelements(int noofelements) {
+        this.noofelements = noofelements;
+    }
+
+    public int getPagesize() {
+        return pagesize;
+    }
+
+    public void setPagesize(int pagesize) {
+        this.pagesize = pagesize;
+    }
+
+    public List<Employee> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(List<Employee> employees) {
+        this.employees = employees;
+    }
+}
+
 /************************************************ END 2 ************************************************/
 

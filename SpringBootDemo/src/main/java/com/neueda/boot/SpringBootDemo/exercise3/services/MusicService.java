@@ -1,45 +1,51 @@
 package com.neueda.boot.SpringBootDemo.exercise3.services;
 
-
-
-import com.neueda.boot.SpringBootDemo.exercise3.entities.MusicData;
+import com.neueda.boot.SpringBootDemo.exercise3.entities.MyMusic;
 import com.neueda.boot.SpringBootDemo.exercise3.exceptions.MusicNotFoundException;
 import com.neueda.boot.SpringBootDemo.exercise3.repo.IMusicRepo;
+import org.bson.types.ObjectId;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class MusicService implements IMusicService {
-
+    @Autowired
     private IMusicRepo repo;
 
-    public MusicService(IMusicRepo repo) {
-        this.repo = repo;
+    @Override
+    public MyMusic addMusicData(MyMusic data) {
+        return repo.save(data);
     }
 
     @Override
-    public MusicData addMusicData(MusicData data) {
-        return null;
-    }
+    public MyMusic deleteMusicData(String name) {
 
+        MyMusic m1 =repo.findByName(name);
+        repo.delete(m1);
+        return m1;
 
-
-    @Override
-    public MusicData deleteMusicData(String name) {
-        return null;
     }
 
     @Override
-    public List<MusicData> getAllMusicData() {
-        return null;
+    public List<MyMusic> getAllMusicData() {
+        return
+                repo.findAll();
     }
 
     @Override
-    public MusicData getMusicByName(String name) {
-        return null;
+    public MyMusic getMusicByName(String name) throws MusicNotFoundException {
+        return repo.findByName(name);
     }
 
     @Override
-    public MusicData updateMusicData(String name , MusicData movieData) {
-        return null;
+    public MyMusic updateMusicData(String name , MyMusic musicData) throws MusicNotFoundException {
+        MyMusic music =  repo.findByName(name);
+        music.setArtists(musicData.getArtists());
+        music.setName(musicData.getName());
+        music.setGenre(musicData.getGenre());
+
+        repo.save(music);
+        return music;
     }
 }

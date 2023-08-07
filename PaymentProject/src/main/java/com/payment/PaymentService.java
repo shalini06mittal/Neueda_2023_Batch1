@@ -7,4 +7,6 @@ public class PaymentService {
         double total = amount + 0.18;
         return  total;
     }
+
+
 }
