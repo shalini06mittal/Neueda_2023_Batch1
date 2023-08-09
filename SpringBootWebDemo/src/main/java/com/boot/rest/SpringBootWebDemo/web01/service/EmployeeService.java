@@ -40,8 +40,8 @@ public class EmployeeService {
         return this.repository.findEmployeesByRegion(region);
     }
     // Get all employees by salary range.
-    public List<Employee> getAllEmployeesBySalaryRange(double from, double to) {
-        return this.repository.findEmployeesInSalaryRange(from,  to);
+    public List<Employee> getAllEmployeessalaryRangen(double from , double to) {
+        return this.repository.findEmployeesInSalaryRange(from, to);
     }
     // Get a page of employees.
     public EmployeePerPageResponse getEmployeesByPagination(int pageno, int size) {

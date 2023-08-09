@@ -19,6 +19,6 @@ public interface EmployeeRepository extends MongoRepository<Employee,Long> {
     @Query("{'dosh' : {$gte : ?0, $lte : ?1}}")
     List<Employee> findEmployeesInSalaryRange(double from, double to);
 
-    Page<Employee> findEmployeesByDoshGreaterThan(double salary, Pageable pageable);
-    Page<Employee> findAll(Pageable pageable);
+   // Page<Employee> findEmployeesByDoshGreaterThan(double salary, Pageable pageable);
+
 }

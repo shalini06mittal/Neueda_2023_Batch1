@@ -27,11 +27,6 @@ public class OrderController {
     {
         return orderService.getAllOrders();
     }
-    @GetMapping("/sales")
-    public List<CountrySales> getCountrySales()
-    {
-        return orderService.getCountrySales();
-    }
     @GetMapping("/year/{year}")
     public List<Order> getOrdersByYear(@PathVariable int year)
     {
@@ -43,4 +38,10 @@ public class OrderController {
     {
         return orderService.getOrderByYearRevenueSort(year, revenue);
     }
+    @GetMapping("/sales")
+    public List<CountrySales> getCountrySales()
+    {
+        return orderService.getCountrySales();
+    }
+
 }

@@ -132,4 +132,11 @@ public class EmployeeRestController {
         return this.employeeService.getEmployeesByPagination(pageno, size);
     }
 
+    @GetMapping("/from/{from}/to/{to}")
+    public List<Employee> getAllEmployeesInSalaryRange(
+            @PathVariable double from, @PathVariable double to) {
+
+        return employeeService.getAllEmployeessalaryRangen(from, to);
+    }
+
 }
