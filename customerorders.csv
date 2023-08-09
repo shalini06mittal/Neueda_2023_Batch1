@@ -1,0 +1,301 @@
+Customer,Product,Year,Country,Quantity,UnitPrice,Revenue
+Vins et alcools Chevalier,Queso Cabrales,2016,France,12,14,168
+Vins et alcools Chevalier,Singaporean Hokkien Fried Mee,2016,France,10,10,98
+Vins et alcools Chevalier,Mozzarella di Giovanni,2016,France,5,35,174
+Toms Spezialitaten,Tofu,2016,Germany,9,19,167
+Toms Spezialitaten,Manjimup Dried Apples,2016,Germany,40,42,1696
+Hanari Carnes,Jack's New England Clam Chowder,2016,Brazil,10,8,77
+Hanari Carnes,Manjimup Dried Apples,2016,Brazil,35,42,1484
+Hanari Carnes,Louisiana Fiery Hot Pepper Sauce,2016,Brazil,15,17,252
+Victuailles en stock,Gustaf's Knackebrod,2016,France,6,17,101
+Victuailles en stock,Louisiana Fiery Hot Pepper Sauce,2016,France,20,17,336
+Supremes delices,Sir Rodney's Marmalade,2016,Belgium,40,65,2592
+Supremes delices,Geitost,2016,Belgium,25,2,50
+Supremes delices,Camembert Pierrot,2016,Belgium,40,27,1088
+Hanari Carnes,Gorgonzola Telino,2016,Brazil,20,10,200
+Hanari Carnes,Chartreuse verte,2016,Brazil,42,14,605
+Hanari Carnes,Maxilaku,2016,Brazil,40,16,640
+Chop-suey Chinese,Guarana Fantastica,2016,Switzerland,15,4,54
+Chop-suey Chinese,Pate chinois,2016,Switzerland,21,19,403
+Chop-suey Chinese,Longlife Tofu,2016,Switzerland,21,8,168
+Richter Supermarkt,Chang,2016,Switzerland,20,15,304
+Richter Supermarkt,Pavlova,2016,Switzerland,35,14,487
+Richter Supermarkt,Inlagd Sill,2016,Switzerland,25,15,380
+Richter Supermarkt,Raclette Courdavault,2016,Switzerland,30,44,1320
+Wellington Importadora,Perth Pasties,2016,Brazil,15,26,393
+Wellington Importadora,Original Frankfurter grune Sobe,2016,Brazil,12,10,125
+HILARION-Abastos,Schoggi Schokolade,2016,Venezuela,25,35,878
+HILARION-Abastos,Chartreuse verte,2016,Venezuela,6,14,86
+HILARION-Abastos,Original Frankfurter grune Sobe,2016,Venezuela,15,10,156
+Ernst Handel,Chang,2016,Austria,50,15,760
+Ernst Handel,Chef Anton's Gumbo Mix,2016,Austria,65,17,1105
+Ernst Handel,Mascarpone Fabioli,2016,Austria,6,26,154
+Centro comercial Moctezuma,Sir Rodney's Scones,2016,Mexico,10,8,80
+Centro comercial Moctezuma,Gravad lax,2016,Mexico,1,21,21
+Ottilies Kaseladen,Jack's New England Clam Chowder,2016,Germany,16,8,123
+Ottilies Kaseladen,Tarte au sucre,2016,Germany,15,39,591
+Ottilies Kaseladen,Outback Lager,2016,Germany,21,12,252
+Que Delicia,Sir Rodney's Scones,2016,Brazil,20,8,160
+Que Delicia,Steeleye Stout,2016,Brazil,20,14,288
+Rattlesnake Canyon Grocery,Chef Anton's Gumbo Mix,2016,USA,12,17,204
+Rattlesnake Canyon Grocery,Uncle Bob's Organic Dried Pears,2016,USA,15,24,360
+Rattlesnake Canyon Grocery,Gnocchi di nonna Alice,2016,USA,2,30,61
+Ernst Handel,Pavlova,2016,Austria,60,14,834
+Ernst Handel,Guarana Fantastica,2016,Austria,28,4,101
+Ernst Handel,Nord-Ost Matjeshering,2016,Austria,60,21,1242
+Ernst Handel,Longlife Tofu,2016,Austria,36,8,288
+Folk och fa HB,Chang,2016,Sweden,35,15,532
+Folk och fa HB,Jack's New England Clam Chowder,2016,Sweden,25,8,193
+Blondesddsl pere et fils,Alice Mutton,2016,France,30,31,936
+Blondesddsl pere et fils,Outback Lager,2016,France,20,12,240
+Wartian Herkku,Queso Manchego La Pastora,2016,Finland,12,30,365
+Frankenversand,Boston Crab Meat,2016,Germany,50,15,735
+Frankenversand,Raclette Courdavault,2016,Germany,70,44,3080
+Frankenversand,Lakkalikoori,2016,Germany,15,14,216
+GROSELLA-Restaurante,Thuringer Rostbratwurst,2016,Venezuela,10,99,990
+GROSELLA-Restaurante,Mozzarella di Giovanni,2016,Venezuela,4,28,111
+White Clover Markets,Geitost,2016,USA,60,2,120
+White Clover Markets,Mozzarella di Giovanni,2016,USA,20,28,556
+Wartian Herkku,Inlagd Sill,2016,Finland,30,15,456
+Wartian Herkku,Ipoh Coffee,2016,Finland,25,37,920
+Split Rail Beer & Ale,Geitost,2016,USA,24,2,48
+Rattlesnake Canyon Grocery,Sir Rodney's Marmalade,2016,USA,6,65,389
+Rattlesnake Canyon Grocery,Gorgonzola Telino,2016,USA,40,10,400
+Rattlesnake Canyon Grocery,Mozzarella di Giovanni,2016,USA,24,28,667
+QUICK-Stop,Ikura,2016,Germany,24,25,595
+QUICK-Stop,Gorgonzola Telino,2016,Germany,15,10,150
+QUICK-Stop,Geitost,2016,Germany,20,2,40
+QUICK-Stop,Boston Crab Meat,2016,Germany,60,15,882
+QUICK-Stop,Lakkalikoori,2016,Germany,33,14,475
+Vins et alcools Chevalier,Flotemysost,2016,France,20,17,344
+Vins et alcools Chevalier,Mozzarella di Giovanni,2016,France,7,28,195
+Magazzini Alimentari Riuniti,Guarana Fantastica,2016,Italy,12,4,43
+Magazzini Alimentari Riuniti,Raclette Courdavault,2016,Italy,6,44,264
+Tortuga Restaurante,Ikura,2016,Mexico,15,25,372
+Tortuga Restaurante,Konbu,2016,Mexico,10,5,48
+Morgenstern Gesundkost,Rossle Sauerkraut,2016,Germany,20,36,728
+Morgenstern Gesundkost,Tarte au sucre,2016,Germany,12,39,473
+Berglunds snabbkop,Gula Malacca,2016,Sweden,16,16,248
+Berglunds snabbkop,Raclette Courdavault,2016,Sweden,15,44,660
+Berglunds snabbkop,Vegie-spread,2016,Sweden,8,35,281
+Berglunds snabbkop,Rod Kaviar,2016,Sweden,25,12,300
+Lehmanns Marktstand,Alice Mutton,2016,Germany,15,31,468
+Berglunds snabbkop,Guarana Fantastica,2016,Sweden,12,4,43
+Berglunds snabbkop,Pate chinois,2016,Sweden,20,19,384
+Berglunds snabbkop,Rhonbrau Klosterbier,2016,Sweden,30,6,186
+Romero y tomillo,Teatime Chocolate Biscuits,2016,Spain,1,7,7
+Romero y tomillo,Guarana Fantastica,2016,Spain,6,4,22
+Romero y tomillo,Steeleye Stout,2016,Spain,4,14,58
+Romero y tomillo,Nord-Ost Matjeshering,2016,Spain,6,21,124
+LILA-Supermercado,Genen Shouyu,2016,Venezuela,20,12,248
+LILA-Supermercado,Teatime Chocolate Biscuits,2016,Venezuela,18,7,131
+LILA-Supermercado,Camembert Pierrot,2016,Venezuela,35,27,952
+LILA-Supermercado,Mozzarella di Giovanni,2016,Venezuela,3,28,83
+Lehmanns Marktstand,Schoggi Schokolade,2016,Germany,15,35,527
+Lehmanns Marktstand,Gula Malacca,2016,Germany,21,16,326
+Lehmanns Marktstand,Camembert Pierrot,2016,Germany,20,27,544
+Lehmanns Marktstand,Laughing Lumberjack Lager,2016,Germany,5,11,56
+QUICK-Stop,Chai,2016,Germany,45,14,648
+QUICK-Stop,Boston Crab Meat,2016,Germany,40,15,588
+QUICK-Stop,Perth Pasties,2016,Germany,36,26,943
+Eastern Connection,Thuringer Rostbratwurst,2017,UK,21,99,2079
+Eastern Connection,Steeleye Stout,2017,UK,35,14,504
+Eastern Connection,Maxilaku,2017,UK,30,16,480
+Rattlesnake Canyon Grocery,Nord-Ost Matjeshering,2017,USA,18,21,373
+Rattlesnake Canyon Grocery,Gnocchi di nonna Alice,2017,USA,70,30,2128
+Rattlesnake Canyon Grocery,Louisiana Fiery Hot Pepper Sauce,2017,USA,20,17,336
+Rattlesnake Canyon Grocery,Flotemysost,2017,USA,60,17,1032
+Ernst Handel,Tunnbrod,2017,Austria,60,7,432
+Ernst Handel,Vegie-spread,2017,Austria,65,35,2282
+Ernst Handel,Pavlova,2017,Austria,21,14,292
+Ernst Handel,Chocolade,2017,Austria,70,10,714
+Magazzini Alimentari Riuniti,Gumbar Gummibarchen,2017,Italy,30,25,747
+Magazzini Alimentari Riuniti,Singaporean Hokkien Fried Mee,2017,Italy,40,11,448
+Magazzini Alimentari Riuniti,Maxilaku,2017,Italy,30,16,480
+LINO-Delicateses,Aniseed Syrup,2017,Venezuela,50,8,400
+Queen Cozinha,Chai,2017,Brazil,10,14,144
+Queen Cozinha,Sir Rodney's Scones,2017,Brazil,30,8,240
+Queen Cozinha,Rossle Sauerkraut,2017,Brazil,42,36,1529
+Queen Cozinha,Inlagd Sill,2017,Brazil,5,15,76
+Queen Cozinha,Boston Crab Meat,2017,Brazil,2,15,29
+Ottilies Kaseladen,Queso Cabrales,2017,Germany,30,17,504
+Ottilies Kaseladen,Gudbrandsdalsost,2017,Germany,15,29,432
+Ottilies Kaseladen,Flotemysost,2017,Germany,15,17,258
+Folies gourmandes,Gravad lax,2017,France,10,21,208
+Folies gourmandes,Tourtiere,2017,France,6,6,35
+Folies gourmandes,Tarte au sucre,2017,France,35,39,1379
+Oceano Atlantico Ltda.,Tofu,2017,Argentina,12,19,223
+Oceano Atlantico Ltda.,Sir Rodney's Scones,2017,Argentina,12,8,96
+Bottom-Dollar Markets,Geitost,2017,Canada,49,2,98
+Bottom-Dollar Markets,Raclette Courdavault,2017,Canada,16,44,704
+Bottom-Dollar Markets,Jack's New England Clam Chowder,2017,Canada,25,8,193
+Bottom-Dollar Markets,Gula Malacca,2017,Canada,40,16,620
+Bottom-Dollar Markets,Raclette Courdavault,2017,Canada,9,44,396
+Wartian Herkku,Tofu,2017,Finland,20,19,372
+La maison d'Asie,Chai,2017,France,24,14,346
+La maison d'Asie,Tarte au sucre,2017,France,40,39,1576
+La maison d'Asie,Lakkalikoori,2017,France,14,14,202
+Familia Arquibaldo,Teatime Chocolate Biscuits,2017,Brazil,18,7,131
+Familia Arquibaldo,Geitost,2017,Brazil,50,2,100
+Hungry Coyote Import Store,Alice Mutton,2017,USA,2,31,62
+Hungry Coyote Import Store,Geitost,2017,USA,20,2,40
+Wartian Herkku,Teatime Chocolate Biscuits,2017,Finland,20,7,146
+Wartian Herkku,Perth Pasties,2017,Finland,10,26,262
+Simons bistro,Cote de Blaye,2017,Denmark,50,211,10540
+Simons bistro,Spegesild,2017,Denmark,2,10,19
+Simons bistro,Scottish Longbreads,2017,Denmark,36,10,360
+Simons bistro,Original Frankfurter grune Sobe,2017,Denmark,35,10,364
+QUICK-Stop,Chang,2017,Germany,60,15,912
+QUICK-Stop,Zaanse koeken,2017,Germany,55,8,418
+QUICK-Stop,Sirop d'erable,2017,Germany,16,23,365
+QUICK-Stop,Longlife Tofu,2017,Germany,15,8,120
+Richter Supermarkt,Camembert Pierrot,2017,Switzerland,60,27,1632
+Richter Supermarkt,Gudbrandsdalsost,2017,Switzerland,20,29,576
+Wellington Importadora,Mishi Kobe Niku,2017,Brazil,20,78,1552
+Wellington Importadora,Konbu,2017,Brazil,2,5,10
+Wellington Importadora,Outback Lager,2017,Brazil,8,12,96
+Wellington Importadora,Rod Kaviar,2017,Brazil,20,12,240
+Que Delicia,Teatime Chocolate Biscuits,2017,Brazil,4,7,29
+Que Delicia,Gumbar Gummibarchen,2017,Brazil,30,25,747
+Que Delicia,Perth Pasties,2017,Brazil,15,26,393
+Que Delicia,Original Frankfurter grune Sobe,2017,Brazil,10,10,104
+Franchi S.p.A.,Gumbar Gummibarchen,2017,Italy,2,25,50
+Gourmet Lanchonetes,Gorgonzola Telino,2017,Brazil,14,10,140
+Gourmet Lanchonetes,Raclette Courdavault,2017,Brazil,20,44,880
+Mere Paillarde,Steeleye Stout,2017,Canada,60,14,864
+Mere Paillarde,Cote de Blaye,2017,Canada,49,211,10329
+Mere Paillarde,Scottish Longbreads,2017,Canada,30,10,300
+La maison d'Asie,Pate chinois,2017,France,10,19,192
+La maison d'Asie,Lakkalikoori,2017,France,20,14,288
+Galeria del gastronomo,Gnocchi di nonna Alice,2017,Spain,5,30,152
+Galeria del gastronomo,Wimmers gute Semmelknodel,2017,Spain,7,27,186
+Piccolo und mehr,Tofu,2017,Austria,35,19,651
+Reggiani Caseifici,Spegesild,2017,Italy,20,10,192
+Hungry Owl All-Night Grocers,Valkoinen suklaa,2017,Ireland,40,13,520
+Hungry Owl All-Night Grocers,Vegie-spread,2017,Ireland,35,35,1229
+Ernst Handel,Alice Mutton,2017,Austria,45,31,1404
+Ernst Handel,Sir Rodney's Scones,2017,Austria,50,8,400
+Ernst Handel,Gnocchi di nonna Alice,2017,Austria,30,30,912
+Ernst Handel,Raclette Courdavault,2017,Austria,70,44,3080
+Bottom-Dollar Markets,Alice Mutton,2017,Canada,50,31,1560
+Bottom-Dollar Markets,Boston Crab Meat,2017,Canada,50,15,735
+Bottom-Dollar Markets,Zaanse koeken,2017,Canada,30,8,228
+Split Rail Beer & Ale,Gumbar Gummibarchen,2017,USA,10,25,249
+Split Rail Beer & Ale,Tourtiere,2017,USA,40,6,236
+Princesa Isabel Vinhos,Gnocchi di nonna Alice,2017,Portugal,28,30,851
+Folk och fa HB,Queso Cabrales,2017,Sweden,6,17,101
+Folk och fa HB,Lakkalikoori,2017,Sweden,18,14,259
+Consolidated Holdings,Chang,2017,UK,10,15,152
+Consolidated Holdings,Gustaf's Knackebrod,2017,UK,12,17,202
+Consolidated Holdings,Mozzarella di Giovanni,2017,UK,10,28,278
+Blondesddsl pere et fils,Spegesild,2017,France,5,10,48
+Blondesddsl pere et fils,Gnocchi di nonna Alice,2017,France,40,30,1216
+Blondesddsl pere et fils,Wimmers gute Semmelknodel,2017,France,30,27,798
+Blondesddsl pere et fils,Rhonbrau Klosterbier,2017,France,24,6,149
+Wartian Herkku,Perth Pasties,2017,Finland,15,26,393
+Toms Spezialitaten,Teatime Chocolate Biscuits,2017,Germany,15,7,110
+Toms Spezialitaten,Sasquatch Ale,2017,Germany,20,11,224
+Mere Paillarde,Queso Manchego La Pastora,2017,Canada,15,30,456
+Mere Paillarde,Pavlova,2017,Canada,16,14,222
+Mere Paillarde,Wimmers gute Semmelknodel,2017,Canada,6,27,160
+Ernst Handel,Flotemysost,2017,Austria,16,22,344
+Split Rail Beer & Ale,Manjimup Dried Apples,2018,USA,6,53,318
+Trail's Head Gourmet Provisioners,Tarte au sucre,2018,USA,3,49,148
+Trail's Head Gourmet Provisioners,Outback Lager,2018,USA,6,15,90
+LILA-Supermercado,Queso Cabrales,2018,Venezuela,20,21,420
+LILA-Supermercado,Raclette Courdavault,2018,Venezuela,40,55,2200
+LILA-Supermercado,Original Frankfurter grune Sobe,2018,Venezuela,15,13,195
+Folk och fa HB,Jack's New England Clam Chowder,2018,Sweden,12,10,116
+Folk och fa HB,Outback Lager,2018,Sweden,9,15,135
+Drachenblut Delikatessen,Gumbar Gummibarchen,2018,Germany,12,31,375
+Drachenblut Delikatessen,Perth Pasties,2018,Germany,20,33,656
+Blondesddsl pere et fils,Gorgonzola Telino,2018,France,35,13,438
+Bon app',Ikura,2018,France,15,31,465
+Bon app',Chartreuse verte,2018,France,21,18,378
+Rancho grande,Sir Rodney's Marmalade,2018,Argentina,5,81,405
+Rancho grande,Cote de Blaye,2018,Argentina,2,264,527
+Island Trading,Chang,2018,UK,10,19,190
+Island Trading,Northwoods Cranberry Sauce,2018,UK,20,40,800
+Island Trading,Konbu,2018,UK,10,6,60
+Island Trading,Camembert Pierrot,2018,UK,21,34,714
+Tradicao Hipermercados,Grandma's Boysenberry Spread,2018,Brazil,6,25,150
+Tradicao Hipermercados,Chartreuse verte,2018,Brazil,28,18,504
+Tradicao Hipermercados,Camembert Pierrot,2018,Brazil,30,34,1020
+Tradicao Hipermercados,Scottish Longbreads,2018,Brazil,24,13,300
+Sante Gourmet,Teatime Chocolate Biscuits,2018,Norway,2,9,18
+Sante Gourmet,Steeleye Stout,2018,Norway,8,18,144
+Sante Gourmet,Cote de Blaye,2018,Norway,8,264,2108
+Sante Gourmet,Ipoh Coffee,2018,Norway,9,46,414
+La maison d'Asie,Konbu,2018,France,3,6,18
+La maison d'Asie,NuNuCa Nub-Nougat-Creme,2018,France,10,14,140
+La maison d'Asie,Gula Malacca,2018,France,16,19,311
+La maison d'Asie,Wimmers gute Semmelknodel,2018,France,3,33,100
+Ottilies Kaseladen,Uncle Bob's Organic Dried Pears,2018,Germany,20,30,600
+Ottilies Kaseladen,Gorgonzola Telino,2018,Germany,9,13,113
+Ottilies Kaseladen,Perth Pasties,2018,Germany,9,33,295
+Tradicao Hipermercados,Thuringer Rostbratwurst,2018,Brazil,8,124,990
+Tradicao Hipermercados,Nord-Ost Matjeshering,2018,Brazil,20,26,518
+Alfreds Futterkiste,Raclette Courdavault,2018,Germany,15,55,825
+Alfreds Futterkiste,Original Frankfurter grune Sobe,2018,Germany,2,13,26
+Ernst Handel,Gustaf's Knackebrod,2018,Austria,52,21,1092
+Ernst Handel,Steeleye Stout,2018,Austria,6,18,108
+Ernst Handel,Camembert Pierrot,2018,Austria,60,34,2040
+Ernst Handel,Wimmers gute Semmelknodel,2018,Austria,30,33,998
+Berglunds snabbkop,Konbu,2018,Sweden,6,6,36
+Berglunds snabbkop,Boston Crab Meat,2018,Sweden,25,18,460
+Berglunds snabbkop,Zaanse koeken,2018,Sweden,40,10,380
+Berglunds snabbkop,Lakkalikoori,2018,Sweden,21,18,378
+LINO-Delicateses,Chai,2018,Venezuela,4,18,72
+LINO-Delicateses,Carnarvon Tigers,2018,Venezuela,25,63,1563
+LINO-Delicateses,Inlagd Sill,2018,Venezuela,50,19,950
+Tradicao Hipermercados,Escargots de Bourgogne,2018,Brazil,30,13,398
+Tradicao Hipermercados,Mozzarella di Giovanni,2018,Brazil,15,35,522
+LINO-Delicateses,NuNuCa Nub-Nougat-Creme,2018,Venezuela,6,14,84
+LINO-Delicateses,Chartreuse verte,2018,Venezuela,10,18,180
+Supremes delices,Ikura,2018,Belgium,16,31,496
+Supremes delices,Gnocchi di nonna Alice,2018,Belgium,30,38,1140
+Supremes delices,Raclette Courdavault,2018,Belgium,50,55,2750
+Supremes delices,Original Frankfurter grune Sobe,2018,Belgium,15,13,195
+Tortuga Restaurante,Queso Cabrales,2018,Mexico,15,21,315
+Tortuga Restaurante,Ipoh Coffee,2018,Mexico,5,46,230
+Tortuga Restaurante,Scottish Longbreads,2018,Mexico,20,13,250
+Tortuga Restaurante,Outback Lager,2018,Mexico,12,15,180
+Victuailles en stock,Manjimup Dried Apples,2018,France,4,53,212
+Piccolo und mehr,Gustaf's Knackebrod,2018,Austria,35,21,735
+QUICK-Stop,Tunnbrod,2018,Germany,70,9,630
+QUICK-Stop,Steeleye Stout,2018,Germany,25,18,450
+QUICK-Stop,Singaporean Hokkien Fried Mee,2018,Germany,42,14,588
+QUICK-Stop,Escargots de Bourgogne,2018,Germany,60,13,795
+QUICK-Stop,Wimmers gute Semmelknodel,2018,Germany,48,33,1596
+Supremes delices,Chef Anton's Cajun Seasoning,2018,Belgium,21,22,462
+Supremes delices,Outback Lager,2018,Belgium,30,15,450
+Supremes delices,Longlife Tofu,2018,Belgium,20,10,200
+Save-a-lot Markets,Chai,2018,USA,80,18,1440
+Save-a-lot Markets,Teatime Chocolate Biscuits,2018,USA,12,9,110
+Save-a-lot Markets,Gravad lax,2018,USA,60,26,1560
+Save-a-lot Markets,Rogede sild,2018,USA,36,10,342
+Save-a-lot Markets,Camembert Pierrot,2018,USA,45,34,1530
+Save-a-lot Markets,Flotemysost,2018,USA,55,22,1183
+Consolidated Holdings,Chef Anton's Gumbo Mix,2018,UK,30,21,641
+Consolidated Holdings,Mishi Kobe Niku,2018,UK,3,97,291
+Koniglich Essen,Aniseed Syrup,2018,Germany,49,10,490
+Koniglich Essen,Gumbar Gummibarchen,2018,Germany,18,31,562
+Victuailles en stock,NuNuCa Nub-Nougat-Creme,2018,France,20,14,280
+Victuailles en stock,Geitost,2018,France,4,3,10
+Victuailles en stock,Outback Lager,2018,France,30,15,450
+Ricardo Adocicados,Chang,2018,Brazil,5,19,95
+Ricardo Adocicados,NuNuCa Nub-Nougat-Creme,2018,Brazil,10,14,140
+Ricardo Adocicados,Raclette Courdavault,2018,Brazil,42,55,2310
+Rattlesnake Canyon Grocery,Chang,2018,USA,15,19,285
+Rattlesnake Canyon Grocery,Alice Mutton,2018,USA,6,39,234
+Rattlesnake Canyon Grocery,Tarte au sucre,2018,USA,50,49,2465
+Blauer See Delikatessen,Carnarvon Tigers,2018,Germany,10,63,625
+Ernst Handel,Ikura,2018,Austria,100,31,3100
+Ernst Handel,Konbu,2018,Austria,65,6,390
+Old World Delicatessen,Pavlova,2018,USA,50,17,873
+Old World Delicatessen,Gorgonzola Telino,2018,USA,14,13,175
+Old World Delicatessen,Gnocchi di nonna Alice,2018,USA,24,38,912
+Old World Delicatessen,Louisiana Fiery Hot Pepper Sauce,2018,USA,15,21,316
+Antonio Moreno Taqueria,Chang,2018,Mexico,20,19,380
+Antonio Moreno Taqueria,Singaporean Hokkien Fried Mee,2018,Mexico,20,14,280
+Berglunds snabbkop,Aniseed Syrup,2018,Sweden,30,10,300
