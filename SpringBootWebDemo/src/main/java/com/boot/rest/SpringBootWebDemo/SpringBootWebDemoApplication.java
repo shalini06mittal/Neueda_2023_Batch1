@@ -1,12 +1,17 @@
 package com.boot.rest.SpringBootWebDemo;
 
 import com.boot.rest.SpringBootWebDemo.web01.dao.EmployeeRepository;
+import com.boot.rest.SpringBootWebDemo.web01.dao.OrderDALMongoTemplate;
 import com.boot.rest.SpringBootWebDemo.web01.entity.Employee;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.logging.Logger;
 
@@ -20,10 +25,24 @@ public class SpringBootWebDemoApplication {
 
 	Logger logger = Logger.getLogger(SpringBootWebDemoApplication.class.getSimpleName());
 	public static void main(String[] args) {
+		ApplicationContext context =
 		SpringApplication.run(SpringBootWebDemoApplication.class, args);
+		OrderDALMongoTemplate template = context.getBean(OrderDALMongoTemplate.class);
+		System.out.println(template.getOrderName("Victuailles en stock"));
 	}
 	@Autowired
 	private EmployeeRepository repository;
+
+	//@Bean
+	public WebMvcConfigurer corsConfigurer() {
+		return new WebMvcConfigurer() {
+			@Override
+			public void addCorsMappings(CorsRegistry registry) {
+				registry.addMapping("/**").allowedMethods("GET","POST","PUT","DELETE")
+						.allowedOrigins("*");
+			}
+		};
+	}
 	@Bean
 	public void init() {
 		logger.info("EMPLOYEES DATA ADDED");
@@ -45,5 +64,7 @@ public class SpringBootWebDemoApplication {
 		repository.save(new Employee(16, "Carys", 124000, "Cardiff"));
 		repository.save(new Employee(17, "Shalini", 224000, "Mumbai"));
 	}
+
+
 
 }

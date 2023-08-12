@@ -23,11 +23,11 @@ public interface IOrderRepo extends MongoRepository<Order,String> {
      * $sort - Sorts the documents given a field and sorting order.
      * $merge - Writes the documents in the pipeline into a collection.
      */
+    // year : 2017, gt 1000
     @Aggregation(pipeline ={
             "{'$match':{'Year':?0, 'Revenue':{$gt:1000}}}"
     })
     public List<Order> getAllOrderByYear(int year);
-
     @Aggregation(pipeline = {
             "{'$match':{'Year':?0, 'Revenue': {$gt: ?1} }}",
             "{'$sample':{size:10}}",

@@ -87,4 +87,13 @@ public class Order {
     public void setSales(double sales) {
         this.sales = sales;
     }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "customer='" + customer + '\'' +
+                ", product='" + product + '\'' +
+                ", country='" + country + '\'' +
+                '}';
+    }
 }

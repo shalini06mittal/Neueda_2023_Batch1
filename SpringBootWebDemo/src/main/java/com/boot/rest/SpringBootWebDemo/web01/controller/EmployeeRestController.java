@@ -35,6 +35,7 @@ import java.util.Map;
 @RequestMapping("/employees")
 // @Tag is used to display name on swagger UI, ONLY IF SWAGGER ADDED AS DEPENDENCY
 @Tag(name="EMPLOYEE-CONTROLLER")
+@CrossOrigin
 public class EmployeeRestController {
 
     @Autowired
@@ -92,6 +93,7 @@ public class EmployeeRestController {
     @PostMapping
     public ResponseEntity<Object> addEmployee(@RequestBody Employee employee)
     {
+        System.out.println((employee));
         try {
             Employee employee1 = this.employeeService.insertEmployee(employee);
             return ResponseEntity.status(HttpStatus.CREATED).body(employee1);
@@ -115,12 +117,15 @@ public class EmployeeRestController {
     @DeleteMapping("/{employeeId}")
     public ResponseEntity<Object> deleteEmployeeById(@PathVariable long employeeId)
     {
+        System.out.println("delete employee "+employeeId);
         Map<StatusMessages , String> map = new HashMap<>();
         try {
             map.put(StatusMessages.SUCCESS, "Employee deleted successfully");
             this.employeeService.deleteEmployee(employeeId);
+            System.out.println("deleted");
             return ResponseEntity.status(HttpStatus.ACCEPTED).body(map);
         } catch (RecordNotFoundException e) {
+            System.out.println("error "+e.getMessage());
             map.put(StatusMessages.FAILURE, e.getMessage());
             return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(map);
         }

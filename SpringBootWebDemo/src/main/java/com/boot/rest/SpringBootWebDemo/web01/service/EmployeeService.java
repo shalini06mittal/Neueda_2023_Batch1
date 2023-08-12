@@ -43,6 +43,7 @@ public class EmployeeService {
     public List<Employee> getAllEmployeessalaryRangen(double from , double to) {
         return this.repository.findEmployeesInSalaryRange(from, to);
     }
+    // 16 => 5
     // Get a page of employees.
     public EmployeePerPageResponse getEmployeesByPagination(int pageno, int size) {
         Pageable pageable = PageRequest.of(pageno, size);
@@ -68,7 +69,7 @@ public class EmployeeService {
     }
     public void deleteEmployee(long employeeId) throws RecordNotFoundException {
 
-        if(repository.existsById(employeeId))
+        if(!repository.existsById(employeeId))
             throw new RecordNotFoundException("employee with "+employeeId+" does not exist");
         repository.deleteById(employeeId);
     }
